@@ -238,11 +238,8 @@ def calculate_values(
 		for entry in entries:
 			d = accounts_by_name.get(entry.account)
 			if not d:
-				frappe.msgprint(
-					_("Could not retrieve information for {0}.").format(entry.account),
-					title="Error",
-					raise_exception=1,
-				)
+				# Skip accounts not in current root_type (e.g., Asset account in P&L report)
+				continue
 			for period in period_list:
 				# check if posting date is within the period
 
